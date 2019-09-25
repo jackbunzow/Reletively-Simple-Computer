@@ -1,0 +1,61 @@
+; Jack Bunzow
+; OLA8
+; Average of 3 numbers
+
+JMP _add
+  
+; Variables
+var1: 0
+var2: 0
+var3: 0
+numerator: 0
+divisor: 3
+result: 0
+temp: 80000000
+check: 80000000
+
+; add the first 3 variables to get our numerator
+_add:      
+   LDAC var1
+   MOVAC  
+   LDAC var2
+   ADD  
+   MOVAC   
+   LDAC var3 
+   ADD	
+   STAC numerator
+   CLAC
+   JUMP _load
+
+; loads the divisor into R then the numerator into ACC
+_load:
+   LDAC divisor
+   MOVAC
+   LDAC numerator
+   JUMP _divide
+
+; perform the divison by subtracting by 3. If the number is negative after subtraction (aka a none
+; evening divisble by 3 number) then jump out of the loop. If the number isn't negative then
+; keep subtracting
+_divide:
+   SUB
+   STAC numerator
+   MVAC
+   LDAC check
+   AND
+   STAC temp
+   LDAC check
+   MVAC
+   LDAC temp
+   SUB
+   JMPZ _done
+   LDAC result
+   INC
+   STAC result
+   JUMP _load
+
+; output how many times the number was divisible by 3 and end the program
+_done:
+   LDAC result
+   OUTR
+   HALT

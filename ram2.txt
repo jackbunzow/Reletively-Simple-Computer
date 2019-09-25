@@ -1,0 +1,78 @@
+; Jack Bunzow
+; OLA8
+; part 2
+
+JMP addition
+  
+; Variables
+var1: A9		
+var2: 2B
+var3: AF
+var4: D1
+addresult: 0
+subresult: 0
+andresult: 0
+orresult: 0
+ashrresult: 0
+incresult: 0
+notresult: 0
+
+; add
+addition:
+   LDAC var2 ; Load the variable into Accumulator
+   MOVAC     ; Move the contents of Accumulator to R
+   LDAC var1 ; Load the second variable into Accumulator
+   ADD       ; Add Accumulator and R, move result into Accumulator
+   OUT       ; should output D4 
+   STAC addresult ;store in respecting result variable
+   CLAC
+
+; subtract
+   LDAC var2 ; Load the variable into Accumulator
+   MOVAC     ; Move the contents of Accumulator to R
+   LDAC var1 ; Load the second variable into Accumulator
+   SUB       ; Subtract Accumulator and R, move result into Accumulator
+   OUT       ; should output 7E
+   STAC subresult ;store in respecting result variable
+   CLAC
+
+; AND
+   LDAC var2 ; Load the variable into Accumulator
+   MOVAC     ; Move the contents of Accumulator to R
+   LDAC var1 ; Load the second variable into Accumulator
+   AND       ; Anding Accumulator and R, move result into Accumulator
+   OUT       ; should output 29
+   STAC andresult ;store in respecting result variable
+   CLAC
+
+; OR
+   LDAC var2 ; Load the variable into Accumulator
+   MOVAC     ; Move the contents of Accumulator to R
+   LDAC var1 ; Load the second variable into Accumulator
+   OR        ; Oring Accumulator and R, move result into Accumulator
+   OUT       ; should output AB
+   STAC orresult ;store in respecting result variable
+   CLAC
+
+; ASHR
+   LDAC var1 ; Load the variable into Accumulator
+   ASHR      ; ASHR Accumulator, move result into Accumulator
+   OUT       ; should output 54
+   STAC ashrresult ;store in respecting result variable
+   CLAC
+
+; increment
+   LDAC var3 ; Load the variable into Accumulator
+   INC       ; Increment Accumulator, move result into Accumulator
+   OUT       ; should output B0
+   STAC incresult ;store in respecting result variable
+   CLAC
+
+; NOT
+   LDAC var4 ; Load the variable into Accumulator
+   NOT       ; Not Accumulator, move result into Accumulator
+   OUT       ; should output ffffff2e
+   STAC notresult ;store in respecting result variable
+   CLAC
+
+   HALT      ; Stop execution

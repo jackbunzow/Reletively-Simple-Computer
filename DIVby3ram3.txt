@@ -1,0 +1,46 @@
+; Jack Bunzow
+; Average of 3 numbers
+
+JMP _add
+  
+; Variables
+
+var1: 3
+var2: 0
+var3: 0
+numerator: 0
+divisor: 3
+result: 0
+
+_add:        ; add the 3 numbers
+   LDAC var1 ; Load the first variable into Accumulator
+   MOVAC     ; Move the contents of Accumulator to R
+   LDAC var2 ; Load the second variable into Accumulator
+   ADD       ; Add Accumulator and R, move result into Accumulator
+   MOVAC     ; Move the contents of Accumulator to R
+   LDAC var3 ;
+   ADD		 ;
+   STAC numerator
+   CLAC
+   JUMP _divide
+
+_divide:
+   LDAC divisor
+   MOVAC
+   LDAC numerator
+   JUMP _loop
+
+_loop:
+   SUB
+   JMPZ _done
+   STAC numerator
+   LDAC result
+   INC
+   OUTR
+   STAC result
+   JUMP _divide
+
+_done:
+   LDAC result
+   OUT
+   HALT
